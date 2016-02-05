@@ -35,7 +35,7 @@ class TblAssetLoanController extends Controller
     public function actionIndex()
     {
         $searchModel = new SearchTblAssetLoan();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(['SearchTblClassroomSetup'=>['status'=>'open']]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

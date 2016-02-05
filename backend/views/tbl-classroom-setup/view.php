@@ -49,7 +49,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'pickup_time',
             'scheduled_start_time',
             'scheduled_end_time',
-            'status',
+            ['attribute'=>'statuS.status_name',
+           'label'=> 'Status'],
         ],
     ]) ?>
 

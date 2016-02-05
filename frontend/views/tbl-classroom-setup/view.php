@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\widgets\ActiveForm;
+use wbraganca\dynamicform\DynamicFormWidget;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\TblClassroomSetup */
@@ -47,7 +49,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'pickup_time',
             'scheduled_start_time:time',
             'scheduled_end_time:time',
-            'status',
+            ['attribute'=>'statuS.status_name',
+           'label'=> 'Status'],
         ],
     ]) ?>
 
