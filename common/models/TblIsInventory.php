@@ -76,4 +76,14 @@ class TblIsInventory extends \yii\db\ActiveRecord
     {
        return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
     }
+
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTypE()
+    {
+       return $this->hasOne(TblInventoryType::classname(),['id'=>'type']);
+    }
 }

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use common\models\TblInventoryType;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\TblIsInventory */
@@ -14,7 +16,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'user_id')->textInput() ?>
 
-    <?= $form->field($model, 'type')->textInput() ?>
+    <?= $form->field($model, 'type')->dropDownList(
+                            ArrayHelper::map(TblInventoryType::find()->all(), 'id','name'),
+                            ['prompt'=>'Select Inventory Item']
+                            )?>
 
     <?= $form->field($model, 'tag')->textInput(['maxlength' => true]) ?>
 

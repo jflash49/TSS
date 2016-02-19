@@ -7,13 +7,21 @@ use common\models\TblClassroom;
 use common\models\TblCourses;
 use common\models\TblClassroomSetupType;
 use common\models\TblIsInventory;
+use common\models\TblInventoryType;
 use kartik\time\TimePicker;
 use wbraganca\dynamicform\DynamicFormWidget;
+use kartik\depdrop\DepDrop;
+use frontend\assets\AppAsset;
 
+AppAsset::register($this);
 
+// $this->registerJsFile('@web/js/dynamic_form.js');
 /* @var $this yii\web\View */
 /* @var $model common\models\TblClassroomSetup */
 /* @var $form yii\widgets\ActiveForm */
+
+
+
 ?>
 
 <div class="tbl-classroom-setup-form">
@@ -76,15 +84,21 @@ use wbraganca\dynamicform\DynamicFormWidget;
 
     <?= $form->field($model, 'scheduled_end_time')->widget(TimePicker::classname(), []);
    ?>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4><i class="glyphicon glyphicon-envelope"></i> Inventory </h4></div>
+        <div class="panel-body">
     <?php DynamicFormWidget::begin([
                 'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
                 'widgetBody' => '.container-items', // required: css class selector
                 'widgetItem' => '.item', // required: css class
                 'limit' => 4, // the maximum times, an element can be cloned (default 999)
                 'min' => 1, // 0 or 1 (default 1)
+                'insertButton' => '.add-item', // css class
+                'deleteButton' => '.remove-item', // css class
                 'model' => $modelItem[0],
                 'formId' => 'dynamic-form',
                 'formFields' => [
+                	'type',
                     'tag',
                     ],
             ]); ?>
@@ -107,7 +121,10 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                 echo Html::activeHiddenInput($modelItem, "[{$i}]form_id");
                             }
                         ?>
-                        <?= $form->field($modelItem, "[{$i}]type")->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($modelItem, "[{$i}]type")->dropDownList(
+                            ArrayHelper::map(TblInventoryType::find()->all(), 'id','name'),
+                            ['prompt'=>'Select Inventory Item']
+                            )?>
                         <div class="row">
                             <div class="col-sm-6">
                                 <?= $form->field($modelItem, "[{$i}]tag")->textInput(['maxlength' => true]) ?>
@@ -118,47 +135,26 @@ use wbraganca\dynamicform\DynamicFormWidget;
                 </div>
                 <?php endforeach; ?>
     <?php DynamicFormWidget::end(); ?>
-
-    <!--?= $form->field($model, 'status')->textInput() ?-->
+    </div>
+    </div>
+    <!--?= $form->field($model, 'status')->textInput() >widget(DepDrop::classname(),[
+                                	'options'=>['id'=>'tag'],
+                                	'pluginOptions'=>[
+                                		'depends'=>["[{$i}]type"],
+                                		'placeholder'=>'Select Tage',
+                                		'url'=>Url::to(['/site/index'])]
+                                	]);
+                                	?>?-->
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+   </div>
+ </html>
 
 
 
 
-</div>
-<?
-$js ='
 
-$(".dynamicform_wrapper").on("beforeInsert", function(e, item) {
-    console.log("beforeInsert");
-});
-
-$(".dynamicform_wrapper").on("afterInsert", function(e, item) {
-    console.log("afterInsert");
-});
-
-$(".dynamicform_wrapper").on("beforeDelete", function(e, item) {
-    if (! confirm("Are you sure you want to delete this item?")) {
-        return false;
-    }
-    return true;
-});
-
-$(".dynamicform_wrapper").on("afterDelete", function(e) {
-    console.log("Deleted item!");
-});
-
-$(".dynamicform_wrapper").on("limitReached", function(e, item) {
-    alert("Limit reached");
-});
-';
-
-//JuiAsset::register($this);
-
-$this->registerJs($js);
-?>
