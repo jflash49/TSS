@@ -30,12 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'inventory_id',
-            'test_previous_button',
+            //'inventory_id'
+            ['attribute'=>'inventory_id',
+            'value'=>'inventorY.tag',
+            'label'=>'Tag'],
+/*test_previous_button',
             'test_next_button',
             'test_laser_pointer',
             'test_battery_1',
-            'test_battery_2',
+            'test_battery_2',*/
             'battery_type:ntext',
             'created_date:date',
             'update_date:date',
