@@ -27,27 +27,27 @@ use yii\widgets\ActiveForm;
        ['prompt'=>'Select .. .']); ?>
 
     <?= $form->field($model, 'test_ethernet_port_1')->dropDownList(
-        ['8'=>'Missing', '9'=>'Working','10'=>'Repair'],
+        ['12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace','19'=>'Not Applicable'],
         ['prompt'=>'Select .. .']); ?>
 
     <?= $form->field($model, 'test_ethernet_port_2')->dropDownList(
-        ['8'=>'Missing', '9'=>'Working','10'=>'Repair'],
+        ['12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace','19'=>'Not Applicable'],
         ['prompt'=>'Select .. .']); ?>
 
     <?= $form->field($model, 'check_retractable_screen')->dropDownList(
-        ['8'=>'Missing', '9'=>'Working','10'=>'Repair'],
+        ['12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace','19'=>'Not Applicable'],
         ['prompt'=>'Select .. .']); ?>
 
     <?= $form->field($model, 'check_projector_retraction')->dropDownList(
-        ['8'=>'Missing', '9'=>'Working','10'=>'Repair'],
+        ['12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace','19'=>'Not Applicable'],
         ['prompt'=>'Select .. .']); ?>
 
     <?= $form->field($model, 'check_projector')->dropDownList(
-        ['8'=>'Missing', '9'=>'Working','10'=>'Repair'],
+        ['12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace','19'=>'Not Applicable'],
         ['prompt'=>'Select .. .']); ?>
 
     <?= $form->field($model, 'check_projector_alignment')->dropDownList(
-        ['8'=>'Missing', '9'=>'Working','10'=>'Repair'],
+        ['12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace','19'=>'Not Applicable'],
         ['prompt'=>'Select .. .']); ?>
 
     <?= $form->field($model, 'total_projector_bulb_life')->textInput()?>
