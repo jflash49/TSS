@@ -77,4 +77,134 @@ class TblAssetTestClassroom extends \yii\db\ActiveRecord
             'comment' => 'Comment',
         ];
     }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestElectricalsocket()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_electrical_socket']);
+    }
+
+     /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestVgasocket()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_vga_socket']);
+    }
+
+     /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestAVports()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_audio_and_video_ports']);
+    }
+
+     /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestEthernetport1()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_ethernet_port_1']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestEthernetport2()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_ethernet_port_2']);
+    }
+
+     /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckRetractablescreen()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_retractable_screen']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckProjectorRetraction()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_projector_retraction']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckProjector()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_projector']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckProjectorAlignment()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_projector_alignment']);
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTotalProjectorBulbLife()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'total_projector_bulb_life']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTotalBulbLifeUsed()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'total_bulb_life_used']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTotalBulbLifeRemaining()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'total_bulb_life_remaining']);
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicestatus()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getPerioD()
+    {
+        $period = explode ('_', $this->service_period); 
+        $start = strtotime($period[0]);
+        $end = strtotime($period[1]);
+        return date('F jS, Y',$start).' - '.date('F jS, Y',$end) ;
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInventorY()
+    {
+       return $this->hasOne(TblClassroom::classname(),['id'=>'inventory_id']);
+    }
 }

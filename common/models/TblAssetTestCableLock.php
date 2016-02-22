@@ -82,9 +82,55 @@ class TblAssetTestCableLock extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getStatuS()
+    public function getKeyStatuses()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_keys_status']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDamageStatuses()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_for_damage_status']);
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServiceStatus()
     {
        return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
     }
-   
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatuS()
+    {
+       return $this->hasOne(TblAssetLoan::classname(),['entry_id'=>'inventory_id']);
+    }
+
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInventorY()
+    {
+       return $this->hasOne(TblIsInventory::classname(),['form_id'=>'inventory_id']);
+    }
+
+   /**
+     * @return String
+     */
+    public function getPerioD()
+    {
+        $period = explode ('_', $this->service_period); 
+        $start = strtotime($period[0]);
+        $end = strtotime($period[1]);
+        return date('F jS, Y',$start).' - '.date('F jS, Y',$end) ;
+    }
 }

@@ -66,4 +66,71 @@ class TblAssetTestClicker extends \yii\db\ActiveRecord
             'comment' => 'Comment',
         ];
     }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestPreviousButton()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_previous_button']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestNextButton()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_next_button']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestLaserPointer()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_laser_pointer']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestBattery1()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_battery_1']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestBattery2()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_battery_2']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServiceStatus()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getPerioD()
+    {
+        $period = explode ('_', $this->service_period); 
+        $start = strtotime($period[0]);
+        $end = strtotime($period[1]);
+        return date('F jS, Y',$start).' - '.date('F jS, Y',$end) ;
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInventorY()
+    {
+       return $this->hasOne(TblIsInventory::classname(),['form_id'=>'inventory_id']);
+    }
 }

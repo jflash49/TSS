@@ -30,9 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
            // 'periods',
 
              [ 'attribute'=>'perioD',
-             //'value' => function ($model){ 
-             //       return $model->getPerioD($model->periods);
-             //   },
              'label'=>"Test Periods"],
 
             ['class' => 'yii\grid\ActionColumn'],
