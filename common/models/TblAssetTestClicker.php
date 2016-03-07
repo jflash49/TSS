@@ -125,6 +125,19 @@ class TblAssetTestClicker extends \yii\db\ActiveRecord
         $end = strtotime($period[1]);
         return date('F jS, Y',$start).' - '.date('F jS, Y',$end) ;
     }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatusName(){
+        if (!($this->getInventorY()->asArray()->all()[0]['status']== null)){
+        $status = $this->getInventorY()->asArray()->all()[0]['status'];
+    }
+        print_r($status);
+        return "true";//TblStatuses::find()->where('id = :status',[':status'=>$status])->one();
+    }
+
     /**
      *
      * @return \yii\db\ActiveQuery
@@ -133,4 +146,6 @@ class TblAssetTestClicker extends \yii\db\ActiveRecord
     {
        return $this->hasOne(TblIsInventory::classname(),['form_id'=>'inventory_id']);
     }
+
+
 }

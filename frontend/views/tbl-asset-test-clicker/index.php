@@ -41,6 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'update_date:date',
             // 'service_period',
             // 'status',
+            //['value'=>'statusName',
+            // 'attribute'=>'status'],
             ['attribute'=>'status',
             'value'=>'serviceStatus.status_name',
             'label'=>'Service Status'],

@@ -108,9 +108,9 @@ class TblAssetTestCableLock extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getStatuS()
-    {
-       return $this->hasOne(TblAssetLoan::classname(),['entry_id'=>'inventory_id']);
+    public function getStatusName(){
+        $status = $this->getInventorY()->asArray()->all()[0]['status'];
+        return TblStatuses::find()->where('id = :status',[':status'=>$status])->one();
     }
 
 
