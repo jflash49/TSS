@@ -26,11 +26,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            ['attribute'=>'inventory_id',
+            'value'=>'inventorY.tag',
+            'label'=>'Tag'],/*
             'id',
             'inventory_id',
             'test_power_button',
             'enter_menu_options',
-            'make_screen_blank_button',
+            'make_screen_blank_button',*/
             // 'choose_source_button',
             // 'test_battery_1',
             // 'test_battery_2',
@@ -43,6 +46,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'service_period',
             // 'status',
             // 'comment',
+            ['attribute'=>'status',
+            'value'=>'servicestatus.status_name',
+            'label'=>'Service Status'],
+             'comment',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

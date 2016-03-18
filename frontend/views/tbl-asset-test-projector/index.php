@@ -26,17 +26,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            ['attribute'=>'inventory_id',
+            'value'=>'inventorY.tag',
+            'label'=>'Tag'],
+            /*'id',
             'inventory_id',
             'check_projector',
             'total_projector_bulb_life',
-            'total_bulb_life_used',
+            'total_bulb_life_used',*/
             // 'total_bulb_life_remaining',
             // 'created_date:date',
             // 'update_date:date',
             // 'service_period',
             // 'status',
             // 'comment',
+            ['attribute'=>'status',
+            'value'=>'servicestatus.status_name',
+            'label'=>'Service Status'],
+             'comment',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

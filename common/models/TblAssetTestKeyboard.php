@@ -85,13 +85,12 @@ class TblAssetTestKeyboard extends \yii\db\ActiveRecord
         $end = strtotime($period[1]);
         return date('F jS, Y',$start).' - '.date('F jS, Y',$end) ;
     }
-
-    /**
+/**
      *
      * @return \yii\db\ActiveQuery
      */
     public function getInventorY()
     {
-       return $this->hasOne(TblClassroom::classname(),['id'=>'inventory_id']);
+       return $this->hasOne(TblIsInventory::classname(),['form_id'=>'inventory_id']);
     }
 }

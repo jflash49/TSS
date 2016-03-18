@@ -25,18 +25,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
+            ['attribute'=>'inventory_id',
+            'value'=>'inventorY.tag',
+            'label'=>'Tag'],/*
             'id',
             'inventory_id',
             'type',
             'check_left_button',
-            'check_right_button',
+            'check_right_button',*/
             // 'check_scroll_wheel',
             // 'created_date:date',
             // 'update_date:date',
             // 'service_period',
             // 'status',
             // 'comment',
+            ['attribute'=>'status',
+            'value'=>'servicestatus.status_name',
+            'label'=>'Service Status'],
+             'comment',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

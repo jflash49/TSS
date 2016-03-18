@@ -111,6 +111,6 @@ class TblAssetTestPowerStrip extends \yii\db\ActiveRecord
      */
     public function getInventorY()
     {
-       return $this->hasOne(TblClassroom::classname(),['id'=>'inventory_id']);
+       return $this->hasOne(TblIsInventory::classname(),['form_id'=>'inventory_id']);
     }
 }

@@ -91,7 +91,7 @@ class TblAssetTestEthernet extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getServicestatus()
+    public function getServiceStatus()
     {
        return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
     }
@@ -113,7 +113,7 @@ class TblAssetTestEthernet extends \yii\db\ActiveRecord
      */
     public function getInventorY()
     {
-       return $this->hasOne(TblClassroom::classname(),['id'=>'inventory_id']);
+       return $this->hasOne(TblIsInventory::classname(),['form_id'=>'inventory_id']);
     }
 
 }

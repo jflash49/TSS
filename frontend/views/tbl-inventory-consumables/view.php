@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\TblInventoryConsumables */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Tbl Inventory Consumables', 'url' => ['index']];
+$this->title = "Consumable #".$model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Consumables', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-inventory-consumables-view">

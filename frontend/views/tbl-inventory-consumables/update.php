@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\TblInventoryConsumables */
 
-$this->title = 'Update Tbl Inventory Consumables: ' . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Tbl Inventory Consumables', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->title = 'Update Consumable: #' . ' ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Consumables', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => "Consumable: #".$model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="tbl-inventory-consumables-update">
