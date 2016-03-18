@@ -59,4 +59,58 @@ class TblAssetTestLaptopBag extends \yii\db\ActiveRecord
             'comment' => 'Comment',
         ];
     }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmptyBag()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'empty_bag']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestStrap()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_strap']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCleanBagMonthly()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'clean_bag_monthly']);
+    }
+    
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicestatus()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getPerioD()
+    {
+        $period = explode ('_', $this->service_period); 
+        $start = strtotime($period[0]);
+        $end = strtotime($period[1]);
+        return date('F jS, Y',$start).' - '.date('F jS, Y',$end) ;
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInventorY()
+    {
+       return $this->hasOne(TblClassroom::classname(),['id'=>'inventory_id']);
+    }
 }

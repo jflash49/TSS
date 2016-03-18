@@ -91,4 +91,180 @@ class TblAssetTestLaptop extends \yii\db\ActiveRecord
             'comment' => 'Comment',
         ];
     }
+
+     /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpdateStandardSoftware()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'update_standard_software']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getApplyOsPatches()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'apply_os_patches']);
+    
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpdateAntiVirus()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'update_antivirus']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getUpdateAntiSpyware()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'update_anti_spyware']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getRunAntiVirusScan()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'run_anti_virus_scan']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRunAntiSpywareScan()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'run_anti_spyware_scan']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getRunCheckDisk()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'run_chkdsk']);
+    }
+    /**
+     * @return String
+     */
+    public function getRunDiskCleanup()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'run_disk_cleanup']);
+    }
+    /**
+     * @return String
+     */
+    public function getRunDiskDefragmenter()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'run_disk_defragmenter']);
+    }
+    /**
+     * @return String
+     */
+    public function getCheckAllButtons()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'check_all_buttons']);
+    }
+    /**
+     * @return String
+     */
+    public function getCheckTouchPad()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'check_touchpad']);
+    }
+    /**
+     * @return String
+     */
+    public function getCheckVolumeButtons()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'check_volume_buttons']);
+    }
+    
+    /**
+     * @return String
+     */
+    public function getCheckInternalMic()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'check_internal_mic']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getCheckInternalSpeakers()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'check_internal_speakers']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getCheckAllPorts()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'check_all_ports']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getTestAdapter()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'test_adapter']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getChargerLaptop()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'charger_laptop']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getTurnOffSleep()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'turn_off_sleep']);
+    }
+    /**
+     * @return String
+     */
+    public function getCleanLaptopMonthly()
+    {
+        return $this->hasOne(TblStatuses::classname(),['id'=>'clean_laptop_monthly']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicestatus()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getPerioD()
+    {
+        $period = explode ('_', $this->service_period); 
+        $start = strtotime($period[0]);
+        $end = strtotime($period[1]);
+        return date('F jS, Y',$start).' - '.date('F jS, Y',$end) ;
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInventorY()
+    {
+       return $this->hasOne(TblClassroom::classname(),['id'=>'inventory_id']);
+    }
 }

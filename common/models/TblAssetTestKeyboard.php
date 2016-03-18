@@ -48,7 +48,7 @@ class TblAssetTestKeyboard extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'inventory_id' => 'Inventory ID',
-            'type' => 'Type',
+            'type' => 'Type', //type is 0 or 1
             'check_keys' => 'Check Keys',
             'created_date' => 'Created Date',
             'update_date' => 'Update Date',
@@ -56,5 +56,42 @@ class TblAssetTestKeyboard extends \yii\db\ActiveRecord
             'status' => 'Status',
             'comment' => 'Comment',
         ];
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckKeys()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_keys']);
+    }
+
+     /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicestatus()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getPerioD()
+    {
+        $period = explode ('_', $this->service_period); 
+        $start = strtotime($period[0]);
+        $end = strtotime($period[1]);
+        return date('F jS, Y',$start).' - '.date('F jS, Y',$end) ;
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInventorY()
+    {
+       return $this->hasOne(TblClassroom::classname(),['id'=>'inventory_id']);
     }
 }

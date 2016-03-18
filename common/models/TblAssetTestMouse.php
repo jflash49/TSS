@@ -50,7 +50,7 @@ class TblAssetTestMouse extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'inventory_id' => 'Inventory ID',
-            'type' => 'Type',
+            'type' => 'Type', // either 1 or 2
             'check_left_button' => 'Check Left Button',
             'check_right_button' => 'Check Right Button',
             'check_scroll_wheel' => 'Check Scroll Wheel',
@@ -60,5 +60,60 @@ class TblAssetTestMouse extends \yii\db\ActiveRecord
             'status' => 'Status',
             'comment' => 'Comment',
         ];
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckLeftButton()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_left_button']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckRightButton()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_right_button']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckScrollWheel()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_scroll_wheel']);
+    }
+
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicestatus()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getPerioD()
+    {
+        $period = explode ('_', $this->service_period); 
+        $start = strtotime($period[0]);
+        $end = strtotime($period[1]);
+        return date('F jS, Y',$start).' - '.date('F jS, Y',$end) ;
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInventorY()
+    {
+       return $this->hasOne(TblClassroom::classname(),['id'=>'inventory_id']);
     }
 }

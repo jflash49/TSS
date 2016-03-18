@@ -61,4 +61,59 @@ class TblAssetTestEthernet extends \yii\db\ActiveRecord
             'comment' => 'Comment',
         ];
     }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestCable()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_cable']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckConnectorTagSide()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_connector_tag_side']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckConnectorFarSide()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_connector_far_side']);
+    }
+    
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicestatus()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getPerioD()
+    {
+        $period = explode ('_', $this->service_period); 
+        $start = strtotime($period[0]);
+        $end = strtotime($period[1]);
+        return date('F jS, Y',$start).' - '.date('F jS, Y',$end) ;
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInventorY()
+    {
+       return $this->hasOne(TblClassroom::classname(),['id'=>'inventory_id']);
+    }
+
 }

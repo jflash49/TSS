@@ -61,4 +61,56 @@ class TblAssetTestPowerStrip extends \yii\db\ActiveRecord
             'comment' => 'Comment',
         ];
     }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckProngs()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_prongs']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckPowerIndicator()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_power_indicator']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCheckSockets()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'check_sockets']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicestatus()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getPerioD()
+    {
+        $period = explode ('_', $this->service_period); 
+        $start = strtotime($period[0]);
+        $end = strtotime($period[1]);
+        return date('F jS, Y',$start).' - '.date('F jS, Y',$end) ;
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInventorY()
+    {
+       return $this->hasOne(TblClassroom::classname(),['id'=>'inventory_id']);
+    }
 }
