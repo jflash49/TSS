@@ -74,4 +74,104 @@ class TblAssetTestRemote extends \yii\db\ActiveRecord
             'comment' => 'Comment',
         ];
     }
+/**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestPowerButton()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_power_button']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEnterMenuOptions()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'enter_menu_options']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMakeScreenBlankButton()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'make_screen_blank_button']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestBattery1()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_battery_1']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTestBattery2()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'test_battery_2']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBatteryType()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'battery_type']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUpELTMountRemote()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'up_elt_mount_remote']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDownELTMountRemote()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'down_elt_mount_remote']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStopELTMountRemote()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'stop_elt_mount_remote']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServicestatus()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
+    }
+
+    /**
+     * @return String
+     */
+    public function getPerioD()
+    {
+        $period = explode ('_', $this->service_period); 
+        $start = strtotime($period[0]);
+        $end = strtotime($period[1]);
+        return date('F jS, Y',$start).' - '.date('F jS, Y',$end) ;
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInventorY()
+    {
+       return $this->hasOne(TblClassroom::classname(),['id'=>'inventory_id']);
+    }
 }
