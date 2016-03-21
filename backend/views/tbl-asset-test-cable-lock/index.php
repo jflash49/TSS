@@ -26,8 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
-            'inventory_id',
+           //'id',
+            //'inventory_id',
+            ['attribute'=>'inventory_id',
+            'attribute'=>'inventory_id',
+            'value'=>'inventorY.tag',
+             'label'=>'Tag'],
             //'check_keys',
             //'check_for_damage',
             //'check_keys_status',
@@ -35,8 +39,13 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'date_created:date',
             // 'update_date:date',
             // 'service_period',
-             'status',
-            // 'comment',
+             //['value'=>'statusName.status_name',
+             //'attribute'=>'status'],
+             ['value'=>'serviceStatus.status_name',
+             'attribute'=>'status',
+             'label'=>'Service Status'],
+             'comment',
+
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
