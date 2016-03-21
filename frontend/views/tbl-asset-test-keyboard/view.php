@@ -30,13 +30,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'inventory_id',
-            'type',
-            'check_keys',
+            ['attribute'=>'inventorY.tag',
+            'label'=>'Tag'],
+            //'inventory_id',
+            ['attribute'=>'theType',
+            'label'=>'Type'],
+            //'type',
+            ['attribute'=>'checkKeys.status_name',
+            'label'=>'Check keys'],
+            //'check_keys',
             'created_date:date',
-            'update_date:datet',
+            'update_date:date',
+            [ 'attribute'=>'perioD',
+             'label'=>"Service Period"],
+            ['attribute'=>'servicestatus.status_name',
+             'label'=>'Service Status'],/*
             'service_period',
-            'status',
+            'status',*/
             'comment',
         ],
     ]) ?>

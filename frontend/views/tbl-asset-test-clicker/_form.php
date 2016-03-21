@@ -41,20 +41,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'battery_type')->textarea(['rows' => 6]) ?>
 
-    <!--?= $form->field($model, 'created_date')->widget(\yii\jui\DatePicker::classname(), [
-    'language' => 'eng',
-    'dateFormat' => 'yyyy-MM-dd',
-]) ?-->
-
-    <!--?= $form->field($model, 'update_date')->widget(\yii\jui\DatePicker::classname(), [
-    'language' => 'eng',
-    'dateFormat' => 'yyyy-MM-dd',
-]) ?-->
-
-    <!--?= $form->field($model, 'service_period')->textInput(['maxlength' => true]) ?-->
-
-    <!--?= $form->field($model, 'status')->textInput() ?-->
-
     <?= $form->field($model, 'comment')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">

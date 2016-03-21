@@ -12,8 +12,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'inventory_id')->textInput() ?>
-
     <?= $form->field($model, 'check_keys')->dropDownList(
         ['8'=>'Missing', '9'=>'Working'],
         ['prompt'=>'Select .. . ']); ?>
@@ -21,24 +19,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'check_for_damage')->dropDownList(
         ['8'=>'Missing', '9'=>'Working','10'=>'Repair'],
         ['prompt'=>'Select .. .']); ?>
-
-    <!--?= $form->field($model, 'check_keys_status')->textInput() ?-->
-
-    <!--?= $form->field($model, 'check_for_damage_status')->textInput() ?-->
-
-    <?= $form->field($model, 'date_created')->widget(\yii\jui\DatePicker::classname(), [
-    'language' => 'eng',
-    'dateFormat' => 'yyyy-MM-dd',
-]) ?>
-
-    <?= $form->field($model, 'update_date')->widget(\yii\jui\DatePicker::classname(), [
-    'language' => 'eng',
-    'dateFormat' => 'yyyy-MM-dd',
-]) ?>
-
-    <?= $form->field($model, 'service_period')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
 
     <?= $form->field($model, 'comment')->textInput(['maxlength' => true]) ?>
 

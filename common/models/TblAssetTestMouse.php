@@ -70,6 +70,17 @@ class TblAssetTestMouse extends \yii\db\ActiveRecord
     {
        return $this->hasOne(TblStatuses::classname(),['id'=>'check_left_button']);
     }
+     /**
+     *
+     * @return String
+     */
+    public function getTheType()
+    {
+        if ($this->type === 0 or $this->type ===12)
+            return  "USB";
+        else
+            return "PS2";
+}
     /**
      *
      * @return \yii\db\ActiveQuery

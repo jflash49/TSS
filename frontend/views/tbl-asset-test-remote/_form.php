@@ -12,41 +12,44 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'inventory_id')->textInput() ?>
+   
 
-    <?= $form->field($model, 'test_power_button')->textInput() ?>
+    <?= $form->field($model, 'test_power_button')->dropDownList(
+        [ '12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace'],
+        ['prompt'=>'Select .. .']); ?>
+    <?= $form->field($model, 'enter_menu_options')->dropDownList(
+        [ '12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace'],
+        ['prompt'=>'Select .. .']); ?>
 
-    <?= $form->field($model, 'enter_menu_options')->textInput() ?>
+    <?= $form->field($model, 'make_screen_blank_button')->dropDownList(
+        [ '12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace'],
+        ['prompt'=>'Select .. .']); ?>
 
-    <?= $form->field($model, 'make_screen_blank_button')->textInput() ?>
+    <?= $form->field($model, 'choose_source_button')->dropDownList(
+        [ '12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace'],
+        ['prompt'=>'Select .. .']); ?>
 
-    <?= $form->field($model, 'choose_source_button')->textInput() ?>
+    <?= $form->field($model, 'test_battery_1')->dropDownList(
+        [ '12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace'],
+        ['prompt'=>'Select .. .']); ?>
 
-    <?= $form->field($model, 'test_battery_1')->textInput() ?>
-
-    <?= $form->field($model, 'test_battery_2')->textInput() ?>
+    <?= $form->field($model, 'test_battery_2')->dropDownList(
+        [ '12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace'],
+        ['prompt'=>'Select .. .']); ?>
 
     <?= $form->field($model, 'battery_type')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'up_elt_mount_remote')->textInput() ?>
+    <?= $form->field($model, 'up_elt_mount_remote')->dropDownList(
+        [ '12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace'],
+        ['prompt'=>'Select .. .']); ?>
 
-    <?= $form->field($model, 'down_elt_mount_remote')->textInput() ?>
+    <?= $form->field($model, 'down_elt_mount_remote')->dropDownList(
+        [ '12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace'],
+        ['prompt'=>'Select .. .']); ?>
 
-    <?= $form->field($model, 'stop_elt_mount_remote')->textInput() ?>
-
-    <?= $form->field($model, 'created_date')->widget(\yii\jui\DatePicker::classname(), [
-    'language' => 'eng',
-    'dateFormat' => 'yyyy-MM-dd',
-]) ?>
-
-    <?= $form->field($model, 'update_date')->widget(\yii\jui\DatePicker::classname(), [
-    'language' => 'eng',
-    'dateFormat' => 'yyyy-MM-dd',
-]) ?>
-
-    <?= $form->field($model, 'service_period')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'stop_elt_mount_remote')->dropDownList(
+        [ '12'=>'Not Tested', '9'=>'Working','10'=>'Repair','11'=>'Replace'],
+        ['prompt'=>'Select .. .']); ?>
 
     <?= $form->field($model, 'comment')->textInput(['maxlength' => true]) ?>
 

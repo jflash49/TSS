@@ -31,8 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             //'inventory_id'
-            ['attribute'=>'inventory_id',
-            'value'=>'inventorY.tag',
+            ['attribute'=>'inventorY.tag',
             'label'=>'Tag'],
 /*test_previous_button',
             'test_next_button',
@@ -42,8 +41,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'battery_type:ntext',
             'created_date:date',
             'update_date:date',
-            'service_period',
-            'status',
+             [ 'attribute'=>'perioD',
+             'label'=>"Service Period"],
+            ['attribute'=>'serviceStatus.status_name',
+             'label'=>'Service Status'],
+            //'service_period',
+            //'status',
             'comment',
         ],
     ]) ?>

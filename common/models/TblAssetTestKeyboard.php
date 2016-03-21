@@ -65,6 +65,15 @@ class TblAssetTestKeyboard extends \yii\db\ActiveRecord
     {
        return $this->hasOne(TblStatuses::classname(),['id'=>'check_keys']);
     }
+    /**
+    * @return String
+    */
+    public function getTheType(){
+        if ($this->type ===  0 or $this->type===12)
+            return "USB";
+        else
+            return "PS2";
+    }
 
      /**
      *

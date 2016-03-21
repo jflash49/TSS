@@ -12,25 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'inventory_id')->textInput() ?>
-
+   
     <?= $form->field($model, 'check_volume_control')->textInput() ?>
 
     <?= $form->field($model, 'check_audio_output')->textInput() ?>
 
-    <?= $form->field($model, 'created_date')->widget(\yii\jui\DatePicker::classname(), [
-    'language' => 'eng',
-    'dateFormat' => 'yyyy-MM-dd',
-]) ?>
-
-    <?= $form->field($model, 'update_date')->widget(\yii\jui\DatePicker::classname(), [
-    'language' => 'eng',
-    'dateFormat' => 'yyyy-MM-dd',
-]) ?>
-
-    <?= $form->field($model, 'service_period')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
 
     <?= $form->field($model, 'comment')->textInput(['maxlength' => true]) ?>
 

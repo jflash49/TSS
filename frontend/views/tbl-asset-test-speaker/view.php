@@ -29,14 +29,25 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'inventory_id',
-            'check_volume_control',
-            'check_audio_output',
+            //'id',
+            ['attribute'=>'inventorY.tag',
+            'label'=>'Tag'],
+            //'inventory_id',
+             ['attribute'=>'checkVolumeControl.status_name',
+            'label'=>'Check Volume Control'],
+            ['attribute'=>'checkAudioOutput.status_name',
+            'label'=>'Check Audio Output'],
+            //'inventory_id',
+            //'check_volume_control',
+           // 'check_audio_output',
             'created_date:date',
             'update_date:date',
+            [ 'attribute'=>'perioD',
+             'label'=>"Service Period"],
+            ['attribute'=>'servicestatus.status_name',
+             'label'=>'Service Status'],/*
             'service_period',
-            'status',
+            'status',*/
             'comment',
         ],
     ]) ?>

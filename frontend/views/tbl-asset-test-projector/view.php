@@ -30,15 +30,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'inventory_id',
-            'check_projector',
+             ['attribute'=>'inventorY.tag',
+            'label'=>'Tag'],
+            //'inventory_id',
+            ['attribute'=>'checkProjector.status_name',
+            'label'=>'Check Projector'],
+            //'check_projector',
             'total_projector_bulb_life',
             'total_bulb_life_used',
             'total_bulb_life_remaining',
             'created_date:date',
             'update_date:date',
+             [ 'attribute'=>'perioD',
+             'label'=>"Service Period"],
+            ['attribute'=>'servicestatus.status_name',
+             'label'=>'Service Status'],/*
             'service_period',
-            'status',
+            'status',*/
             'comment',
         ],
     ]) ?>
