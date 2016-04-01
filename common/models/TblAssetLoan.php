@@ -123,5 +123,16 @@ class TblAssetLoan extends \yii\db\ActiveRecord
     {
        return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
     }
+
+    /**
+    *
+    * @return Strin
+    */
+    public function getBorrowedItems(){
+        $items =" ";
+
+        return $items;
+    }
+
    
 }
