@@ -207,6 +207,5 @@ class TblAssetTestClassroom extends \yii\db\ActiveRecord
     {
        return $this->hasOne(TblClassroom::classname(),['id'=>'inventory_id']);
     }
-
-    
+        
 }

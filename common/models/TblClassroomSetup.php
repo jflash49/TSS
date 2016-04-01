@@ -110,5 +110,12 @@ class TblClassroomSetup extends \yii\db\ActiveRecord
        return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
     }
    
+   /**
+   *
+   * @return String
+   */
+   public function getInventoryItems(){
+    return " My List - should include all inventory items, that match..";
+   }
 
 }

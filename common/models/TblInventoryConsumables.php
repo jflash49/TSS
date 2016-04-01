@@ -52,4 +52,12 @@ class TblInventoryConsumables extends \yii\db\ActiveRecord
             'current_stock' => 'Current Stock',
         ];
     }
+
+    /**
+    *
+    *   @return integer
+    */
+    public function getReorderQuantity(){
+        return ($this->optimal_storage_level - $this->current_stock > 0 ? $this->optimal_storage_level - $this->current_stock :0);
+    }
 }

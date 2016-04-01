@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-     <?= $form->field($model, 'check_keys')->dropDownList(
+    <?= $form->field($model, 'check_keys')->dropDownList(
         ['8'=>'Missing', '9'=>'Working'],
         ['prompt'=>'Select .. . ']); ?>
 

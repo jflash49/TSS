@@ -86,7 +86,14 @@ class TblAssetTestEthernet extends \yii\db\ActiveRecord
     {
        return $this->hasOne(TblStatuses::classname(),['id'=>'check_connector_far_side']);
     }
-    
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatusName(){
+       $status = $this->getInventorY()->asArray()->one()['status'];
+        return TblStatuses::find()->where('id = :status',[':status'=>$status]);
+    }
     /**
      *
      * @return \yii\db\ActiveQuery

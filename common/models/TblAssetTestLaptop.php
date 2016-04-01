@@ -267,4 +267,12 @@ class TblAssetTestLaptop extends \yii\db\ActiveRecord
     {
        return $this->hasOne(TblIsInventory::classname(),['form_id'=>'inventory_id']);
     }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatusName(){
+       $status = $this->getInventorY()->asArray()->one()['status'];
+        return TblStatuses::find()->where('id = :status',[':status'=>$status]);
+    }
 }

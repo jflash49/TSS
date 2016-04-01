@@ -14,7 +14,6 @@ use common\models\TblInventoryType;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
 
     <?= $form->field($model, 'type')->dropDownList(
                             ArrayHelper::map(TblInventoryType::find()->all(), 'id','name'),
@@ -23,27 +22,15 @@ use common\models\TblInventoryType;
 
     <?= $form->field($model, 'tag')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'closed_by')->textInput() ?>
-
+   
     <?= $form->field($model, 'start_date')->widget(\yii\jui\DatePicker::classname(),[
     'language'=>'eng',
     'dateFormat'=>'yyyy-MM-dd']) ?>
+    <?= $form->field($model, 'closed_by')->textInput() ?>
 
-    <?= $form->field($model, 'end_date')->widget(\yii\jui\DatePicker::classname(),[
-    'language'=>'eng',
-    'dateFormat'=>'yyyy-MM-dd']) ?>
-
-    <?= $form->field($model, 'assigned_to')->textInput() ?>
-
-    <?= $form->field($model, 'last_date_serviced')->widget(\yii\jui\DatePicker::classname(),[
-    'language'=>'eng',
-    'dateFormat'=>'yyyy-MM-dd']) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'inventory')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'purpose')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'status')->dropDownList(
+        ['1'=>'Available', '6'=>'Not Available','8'=>'Missing'],
+        ['prompt'=>'Select .. . ']); ?>
 
     <?= $form->field($model, 'comments')->textInput(['maxlength' => true]) ?>
 

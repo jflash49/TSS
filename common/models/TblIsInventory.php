@@ -69,6 +69,13 @@ class TblIsInventory extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUseR()
+    {
+        return $this ->hasOne(User::className(),['id'=>'user_id']);
+    }
+    /**
      *
      * @return \yii\db\ActiveQuery
      */

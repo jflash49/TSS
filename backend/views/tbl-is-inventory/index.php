@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\SearchTblIsInventory */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tbl Is Inventories';
+$this->title = ' I.S Inventories';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-is-inventory-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Tbl Is Inventory', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create (I.S Inventory)', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,16 +25,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'form_id',
-            'user_id',
-            'type',
+            //'form_id',
+            //'user_id',
+            //'type',
+            ['attribute'=>'type',
+            'value'=>'typE.name',
+           'label'=> 'Type'],
             'tag',
-            'closed_by',
-            // 'start_date',
-            // 'end_date',
+            //'closed_by',
+            // 'start_date:date',
+            // 'end_date:date',
             // 'assigned_to',
-            // 'last_date_serviced',
-            // 'status',
+            // 'last_date_serviced:date',
+            // 'status,'
+             ['attribute'=>'status',
+            'value'=>'statuS.status_name',
+           'label'=> 'Status'],
             // 'inventory',
             // 'purpose',
             // 'comments',

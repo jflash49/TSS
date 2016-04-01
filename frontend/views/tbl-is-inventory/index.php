@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'value'=>'typE.name',
            'label'=> 'Type'],
             'tag',
-            'closed_by',
+            //'closed_by',
             // 'start_date:date',
             // 'end_date:date',
             // 'assigned_to',

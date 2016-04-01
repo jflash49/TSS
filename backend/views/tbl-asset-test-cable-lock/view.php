@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-             //'inventory_id',
+            //'inventory_id',
             ['attribute'=>'inventorY.tag',
              'label'=>'Inventory Item'],
             ['attribute'=>'keyStatus.status_name',
