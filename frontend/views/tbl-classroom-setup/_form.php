@@ -122,7 +122,7 @@ AppAsset::register($this);
                         ?>
                         <div class="row">
                          <div class="col-sm-6">
-                        <?= $form->field($modelItem, '[{$i}]type')->dropDownList(
+                        <?= $form->field($modelItem, "[{$i}]type")->dropDownList(
                             ArrayHelper::map(TblInventoryType::find()->all(), 'id','name'),
                             ['prompt'=>'Select Inventory Item']
                             )?>
@@ -144,15 +144,15 @@ AppAsset::register($this);
     <?php DynamicFormWidget::end(); ?>
     </div>
     </div>
-    <!--?= $form->field($model, 'status')->textInput()->widget(DepDrop::classname(),[
+    <?= $form->field($model, 'status')->textInput()->widget(DepDrop::classname(),[
                                 	'options'=>['id'=>'tag'],
                                 	'pluginOptions'=>[
-                                		'depends'=>[Html::getInputId($model, '[{$i}]type')],
+                                		'depends'=>[Html::getInputId($model, "[{$i}]type")],
                                 		'placeholder'=>'Select Tag',
-                                		'url'=>Url::['inventoryTag']]
+                                		'url'=>['/inventoryTag/']]
                                 	]);
                                 	?>
-                                    ?-->
+                                 
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
