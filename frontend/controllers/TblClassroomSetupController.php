@@ -206,4 +206,25 @@ class TblClassroomSetupController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     *
+     *
+     *
+     */
+    public function actionInventoryTag(){
+        $out=[];
+        if (isset($_POST['depdrop_parents'])){
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null){
+                $type = $parent[0];
+                $out = TblIsInventory::find()->where(['type' => $parents])
+                                ->select(['tag','tag'])->asArray()->all();
+                echo Json::ecncode(['output'=>$out, 'selected'=>'']);
+                return;
+            }
+        }
+        echo Json::encode(['output'=>$out,'selected'=>'']);
+    }
+
 }
