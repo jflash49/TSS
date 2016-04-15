@@ -4,6 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use common\models\TblAssetLoanPurpose;
+use common\models\TblIsInventory;
+use common\models\TblInventoryType;
+use kartik\time\TimePicker;
+use wbraganca\dynamicform\DynamicFormWidget;
+use frontend\assets\AppAsset;
+use yii\helpers\Url;
+AppAsset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $model common\models\TblAssetLoan */
@@ -12,13 +19,7 @@ use common\models\TblAssetLoanPurpose;
 
 <div class="tbl-asset-loan-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <!--?= $form->field($model, 'form_id')->textInput() ?-->
-
-    <!--?= $form->field($model, 'user_id')->textInput() ?-->
-
-    <!--?= $form->field($model, 'form_type')->textInput() ?-->
+    <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
 
     <?= $form->field($model, 'external_user')->textInput(['style'=>'width:30%;']) ?>
 
@@ -28,29 +29,9 @@ use common\models\TblAssetLoanPurpose;
 
     <?= $form->field($external, 'last_name')->textarea(['rows' => 1, 'style'=>'width:30%;']) ?>
 
-    <!--?= $form->field($external, 'status')->textInput() ?-->
-
     <?= $form->field($external, 'phone_number')->textInput() ?>
 
     <?= $form->field($external, 'email')->textInput(['maxlength' => true]) ?>
-
-
-    <!--?= $form->field($model, 'closed_by')->textInput() ?-->
-
-    <!--?= $form->field($model, 'start_date')->widget(\yii\jui\DatePicker::classname(), [
-    'language' => 'eng',
-    'dateFormat' => 'yyyy-MM-dd',
-]) ?-->
-
-    <!--?= $form->field($model, 'end_date')->widget(\yii\jui\DatePicker::classname(), [
-    'language' => 'eng',
-    'dateFormat' => 'yyyy-MM-dd',
-]) ?-->
-
-    <!--?= $form->field($model, 'update_date')->widget(\yii\jui\DatePicker::classname(), [
-    'language' => 'eng',
-    'dateFormat' => 'yyyy-MM-dd',
-]) ?-->
 
     <?= $form->field($model, 'assigned_to')->textInput() ?>
 
@@ -74,6 +55,66 @@ use common\models\TblAssetLoanPurpose;
     'language' => 'eng',
     'dateFormat' => 'yyyy-MM-dd',
 ]) ?>
+<div class="panel panel-default">
+        <div class="panel-heading"><h4><i class="glyphicon glyphicon-envelope"></i> Inventory </h4></div>
+        <div class="panel-body">
+    <?php DynamicFormWidget::begin([
+                'widgetContainer' => 'dynamicform_wrapper', // required: only alphanumeric characters plus "_" [A-Za-z0-9_]
+                'widgetBody' => '.container-items', // required: css class selector
+                'widgetItem' => '.item', // required: css class
+                'limit' => 8, // the maximum times, an element can be cloned (default 999)
+                'min' => 1, // 0 or 1 (default 1)
+                'insertButton' => '.add-item', // css class
+                'deleteButton' => '.remove-item', // css class
+                'model' => $modelItem[0],
+                'formId' => 'dynamic-form',
+                'formFields' => [
+                    'type',
+                    'tag',
+                    ],
+            ]); ?>
+
+            <div class="container-items"><!-- widgetContainer -->
+            <?php foreach ($modelItem as $i => $modelItem): ?>
+                <div class="item panel panel-default"><!-- widgetBody -->
+                    <div class="panel-heading">
+                        <div class="pull-right">
+                            <button type="button" class="add-item btn btn-success btn-xs"><i class="glyphicon glyphicon-plus"></i></button>
+                            <button type="button" class="remove-item btn btn-danger btn-xs"><i class="glyphicon glyphicon-minus"></i></button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body">
+                        <?php
+                            // necessary for update action.
+                            if (! $modelItem->isNewRecord) {
+                                echo Html::activeHiddenInput($modelItem, "[{$i}]form_id");
+                            }
+                        ?>
+                        <div class="row">
+                         <div class="col-sm-6">
+                        <?= $form->field($modelItem, "[{$i}]type")->dropDownList(
+                            ArrayHelper::map(TblInventoryType::find()->all(), 'id','name'),
+                            ['prompt'=>'Select Inventory Item']
+                            )?>
+                        </div>
+                           <div class="col-sm-6">
+                                <?= $form->field($modelItem, "[{$i}]tag")->dropDownList(
+                            ArrayHelper::map(TblIsInventory::find()
+                                ->where(['type' => "[{$i}]type"])
+                                ->all(),'tag','tag'),
+                            //(TblIsInventory::find()->all(), 'tag','tag'),
+                            ['prompt'=>'Select Inventory Item']
+                            )?>
+                        </div>
+                            </div>
+                        </div><!-- .row -->
+                    </div>
+                </div>
+                <?php endforeach; ?>
+    <?php DynamicFormWidget::end(); ?>
+    </div>
+    </div>
 
     <!--?= $form->field($model, 'status')->dropDownList(['3' => 'On Loan', '4' => 'Over Due', '5' => 'Missing'])?-->
 

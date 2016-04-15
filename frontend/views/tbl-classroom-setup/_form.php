@@ -130,7 +130,7 @@ AppAsset::register($this);
                            <div class="col-sm-6">
                                 <?= $form->field($modelItem, "[{$i}]tag")->dropDownList(
                             ArrayHelper::map(TblIsInventory::find()
-                                ->where(['type' => '[{$i}]type'])
+                                ->where(['type' => "[{$i}]type"+1])
                                 ->all(),'tag','tag'),
                             //(TblIsInventory::find()->all(), 'tag','tag'),
                             ['prompt'=>'Select Inventory Item']
@@ -145,11 +145,12 @@ AppAsset::register($this);
     </div>
     </div>
     <?= $form->field($model, 'status')->textInput()->widget(DepDrop::classname(),[
-                                	'options'=>['id'=>'tag'],
+                                	'options'=>['id'=>'status'],
                                 	'pluginOptions'=>[
-                                		'depends'=>[Html::getInputId($model, "[{$i}]type")],
+                                		'depends'=>[("[{$i}]tag")],
                                 		'placeholder'=>'Select Tag',
-                                		'url'=>['/inventoryTag/']]
+                                		'url'=>Url::to(['/tbl-classroom-setup/tag'])
+                                        ]
                                 	]);
                                 	?>
                                  

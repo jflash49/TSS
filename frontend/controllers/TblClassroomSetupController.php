@@ -207,19 +207,20 @@ class TblClassroomSetupController extends Controller
         }
     }
 
-    /**
-     *
-     *
-     *
-     */
+   /**
+   *
+   * @param none
+   * @return mixed
+   */
     public function actionInventoryTag(){
         $out=[];
         if (isset($_POST['depdrop_parents'])){
             $parents = $_POST['depdrop_parents'];
             if ($parents != null){
                 $type = $parent[0];
-                $out = TblIsInventory::find()->where(['type' => $parents])
-                                ->select(['tag','tag'])->asArray()->all();
+                $out = array("Volvo", "BMW", "Toyota");
+               // $out = TblIsInventory::find()->where(['type' => $parents])
+                //                ->select(['tag','tag'])->asArray()->all();
                 echo Json::ecncode(['output'=>$out, 'selected'=>'']);
                 return;
             }

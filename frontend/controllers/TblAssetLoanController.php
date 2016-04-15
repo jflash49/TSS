@@ -10,6 +10,10 @@ use common\models\SearchTblExternalUser;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\TblIsInventory;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use common\models\Model;
 
 /**
  * TblAssetLoanController implements the CRUD actions for TblAssetLoan model.
@@ -64,6 +68,7 @@ class TblAssetLoanController extends Controller
     {
         $model = new TblAssetLoan();
         $external = new TblExternalUser();
+        $modelItem = [new TblIsInventory()];
 
         if ($model->load(Yii::$app->request->post()) && $external->load(Yii::$app->request->post())) {
 
@@ -80,11 +85,44 @@ class TblAssetLoanController extends Controller
             	$external->save();
             }
 
-            return $this->redirect(['view', 'id' => $model->entry_id]);
+            $modelItem = Model::createMultiple(TblIsInventory::classname());
+             Model::loadMultiple($modelItem, Yii::$app->request->post());
+
+             if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ArrayHelper::merge(
+                    ActiveForm::validateMultiple($modelItem),
+                    ActiveForm::validate($model)
+                );
+            }
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($modelItem) && $valid;
+
+            if ($valid) {
+                            $transaction = \Yii::$app->db->beginTransaction();
+                            try {
+                                if ($flag = $model->save(false)) {
+                                    foreach ($modelItem as $modelItem) {
+                                        $modelItem->entry_id = $model->inventory;
+                                        if (! ($flag = $modelItem->save(false))) {
+                                            $transaction->rollBack();
+                                            break;
+                                        }
+                                    }
+                                }
+                                if ($flag) {
+                                    $transaction->commit();
+                                    return $this->redirect(['view', 'id' => $model->entry_id]);
+                                }
+                            } catch (Exception $e) {
+                                $transaction->rollBack();
+                            }
+                        }
         } else {
             return $this->render('create', [
                 'model' => $model,
                 'external'=>$external,
+                'modelItem'=>(empty($modelItem))? [new TblIsInventory]: $modelItem
             ]);
         }
     }
@@ -98,16 +136,50 @@ class TblAssetLoanController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-       	
+        $external = $this->findExternal($id);
+       	$modelItem = $model->inventory;
+        if ($model->load(Yii::$app->request->post())) {
+            $oldIds = ArrayHelper::map($modelItem, 'entry_id','inventory');
+            $modelItem = Model::createMultiple(TblIsInventory::classname(),$modelItem);
+            Model::loadMultiple($modelItem, Yii::$app->request->post());
+             $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsAddress, 'id', 'id')));
+
         $user = $model->external_user;
         $external = TblExternalUser::find()->where(['external_user'=>$user])->one();
-       
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->entry_id]);
+        // validate all models
+            $valid = $model->validate();
+            $valid = Model::validateMultiple($modelItem) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        if (! empty($deletedIDs)) {
+                            Address::deleteAll(['entry_id' => $deletedIDs]);
+                        }
+                        foreach ($modelsAddress as $modelAddress) {
+                            $modelItemAddress->form_id = $model->inventory;
+                            if (! ($flag = $modelItem->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->entry_id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
+        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->entry_id]);*/
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'external' => $external,
+                 'external' => $external,
+                 'modelItem'=>(empty($modelItem))? [new TblIsInventory]: $modelItem
             ]);
         }
     }
@@ -135,6 +207,22 @@ class TblAssetLoanController extends Controller
     protected function findModel($id)
     {
         if (($model = TblAssetLoan::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    /**
+     * Finds the TblAssetLoan model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return TblExternalUser the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findExternal($id)
+    {
+        $ext = $this->findModel($id);
+        if (($model = TblExternalUser::findOne(['external_user'=>$ext['external_user']])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
