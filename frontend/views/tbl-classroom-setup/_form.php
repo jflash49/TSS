@@ -128,13 +128,22 @@ AppAsset::register($this);
                             )?>
                         </div>
                            <div class="col-sm-6">
-                                <?= $form->field($modelItem, "[{$i}]tag")->dropDownList(
+                                <?= $form->field($modelItem, "[{$i}]tag")
+                                ->widget(DepDrop::classname(),[
+                                    'options'=>['id'=>'status'],
+                                    'pluginOptions'=>[
+                                        'depends'=>[Html::getInputId($modelItem,"[{$i}]type")],
+                                        'placeholder'=>'Select  ...',
+                                        'url'=>Url::to(['tbl-classroom-setup/tag'])
+                                        ]
+                                    ]);/*->dropDownList(
                             ArrayHelper::map(TblIsInventory::find()
                                 ->where(['type' => "[{$i}]type"+1])
                                 ->all(),'tag','tag'),
                             //(TblIsInventory::find()->all(), 'tag','tag'),
                             ['prompt'=>'Select Inventory Item']
-                            )?>
+                            )*/
+                            ?>
                         </div>
                             </div>
                         </div><!-- .row -->
@@ -144,11 +153,11 @@ AppAsset::register($this);
     <?php DynamicFormWidget::end(); ?>
     </div>
     </div>
-    <?= $form->field($model, 'status')->textInput()->widget(DepDrop::classname(),[
+    <?= $form->field($model, 'status')->widget(DepDrop::classname(),[
                                 	'options'=>['id'=>'status'],
                                 	'pluginOptions'=>[
                                 		'depends'=>[("[{$i}]tag")],
-                                		'placeholder'=>'Select Tag',
+                                		'placeholder'=>'Select  ...',
                                 		'url'=>Url::to(['/tbl-classroom-setup/tag'])
                                         ]
                                 	]);

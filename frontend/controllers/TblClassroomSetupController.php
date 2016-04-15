@@ -12,6 +12,7 @@ use common\models\TblIsInventory;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use common\models\Model;
+use Response;
 /**
  * TblClassroomSetupController implements the CRUD actions for TblClassroomSetup model.
  */
@@ -212,7 +213,7 @@ class TblClassroomSetupController extends Controller
    * @param none
    * @return mixed
    */
-    public function actionInventoryTag(){
+    public function actionTag(){
         $out=[];
         if (isset($_POST['depdrop_parents'])){
             $parents = $_POST['depdrop_parents'];
@@ -224,6 +225,7 @@ class TblClassroomSetupController extends Controller
                 echo Json::ecncode(['output'=>$out, 'selected'=>'']);
                 return;
             }
+            $out = array("Volvo", "BMW", "Toyota");
         }
         echo Json::encode(['output'=>$out,'selected'=>'']);
     }
