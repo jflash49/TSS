@@ -9,6 +9,7 @@ use common\models\TblInventoryType;
 use kartik\time\TimePicker;
 use wbraganca\dynamicform\DynamicFormWidget;
 use frontend\assets\AppAsset;
+use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
 AppAsset::register($this);
 
@@ -99,13 +100,18 @@ AppAsset::register($this);
                             )?>
                         </div>
                            <div class="col-sm-6">
-                                <?= $form->field($modelItem, "[{$i}]tag")->dropDownList(
-                            ArrayHelper::map(TblIsInventory::find()
-                                ->where(['type' => "[{$i}]type"])
-                                ->all(),'tag','tag'),
+                                  <?= $form->field($modelItem, "[{$i}]tag")
+                                ->widget(DepDrop::classname(),[
+                                    'options'=>['id'=>'tag'],
+                                    'pluginOptions'=>[
+                                        'depends'=>[Html::getInputId($modelItem,"[{$i}]type")],
+                                        'placeholder'=>'Select  ...',
+                                        'url'=>Url::to(['/tbl-asset-loan/tag'])
+                                        ]
+                                    ]);
                             //(TblIsInventory::find()->all(), 'tag','tag'),
-                            ['prompt'=>'Select Inventory Item']
-                            )?>
+                           // ['prompt'=>'Select Inventory Item']
+                            //)?>
                         </div>
                             </div>
                         </div><!-- .row -->

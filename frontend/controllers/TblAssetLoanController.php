@@ -14,6 +14,7 @@ use common\models\TblIsInventory;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use common\models\Model;
+use yii\helpers\Json;
 
 /**
  * TblAssetLoanController implements the CRUD actions for TblAssetLoan model.
@@ -157,14 +158,15 @@ class TblAssetLoanController extends Controller
                         if (! empty($deletedIDs)) {
                             Address::deleteAll(['entry_id' => $deletedIDs]);
                         }
-                        foreach ($modelsAddress as $modelAddress) {
-                            $modelItemAddress->form_id = $model->inventory;
-                            if (! ($flag = $modelItem->save(false))) {
-                                $transaction->rollBack();
-                                break;
+                        
+                       foreach ($modelItem as $modelItem) {
+                                    $modelItem->form_id = $model->inventory;
+                                    if (! ($flag = $modelItem->save(false))) {
+                                        $transaction->rollBack();
+                                        break;
+                                    }
+                                }
                             }
-                        }
-                    }
                     if ($flag) {
                         $transaction->commit();
                         return $this->redirect(['view', 'id' => $model->entry_id]);
@@ -227,5 +229,26 @@ class TblAssetLoanController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     *
+     * @param none
+     * @return mixed
+     */
+    public function actionTag(){
+        $out=[];
+        if (isset($_POST['depdrop_parents'])){
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null){
+                $type = $parents[0];
+                //$out = array('Volvo', "BMW", "Toyota");
+                $out = TblIsInventory::find()->where(['type' => $parents[0]])->select(['tag'])->asArray()->all();
+                echo Json::encode(['output'=>$out, 'selected'=>'']);
+                return;
+            }
+            $out = array("Volvo", "BMW", "Toyota");
+        }
+        echo Json::encode(['output'=>$out,'selected'=>'']);
     }
 }

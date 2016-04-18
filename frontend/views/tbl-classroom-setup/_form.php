@@ -134,7 +134,7 @@ AppAsset::register($this);
                                     'pluginOptions'=>[
                                         'depends'=>[Html::getInputId($modelItem,"[{$i}]type")],
                                         'placeholder'=>'Select  ...',
-                                        'url'=>Url::to(['tbl-classroom-setup/tag'])
+                                        'url'=>Url::to(['/tbl-classroom-setup/tag'])
                                         ]
                                     ]);/*->dropDownList(
                             ArrayHelper::map(TblIsInventory::find()
@@ -153,17 +153,16 @@ AppAsset::register($this);
     <?php DynamicFormWidget::end(); ?>
     </div>
     </div>
-    <?= $form->field($model, 'status')->widget(DepDrop::classname(),[
+    
+    <!--?= $form->field($model, 'status')->widget(DepDrop::classname(),[
                                 	'options'=>['id'=>'status'],
                                 	'pluginOptions'=>[
-                                		'depends'=>[("[{$i}]tag")],
+                                		'depends'=>[Html::getInputId($modelItem,"[{$i}]type")],
                                 		'placeholder'=>'Select  ...',
                                 		'url'=>Url::to(['/tbl-classroom-setup/tag'])
                                         ]
                                 	]);
-                                	?>
-                                 
-
+                                	?-->
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
