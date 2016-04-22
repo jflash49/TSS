@@ -219,7 +219,7 @@ class TblClassroomSetupController extends Controller
             if ($parents != null){
                 $type = $parents[0];
                 //$out = array('Volvo', "BMW", "Toyota");
-                $out = TblIsInventory::find()->where(['type' => $parents[0]])->select(['tag'])->asArray()->all();
+                $out = self::findInventory($parents[0]);//TblIsInventory::find()->where(['type' => $parents[0]])->select(['tag'])->asArray()->all();
                 echo Json::encode(['output'=>$out, 'selected'=>'']);
                 return;
             }
@@ -227,5 +227,20 @@ class TblClassroomSetupController extends Controller
         }
         echo Json::encode(['output'=>$out,'selected'=>'']);
     }
+
+    protected function findInventory($param){
+    	$data = TblIsInventory::find()->where(['type' => $param])->select(['form_id','tag'])->asArray()->all();   
+        if (count($data) > 0) {
+            foreach ($data as $i => $account) {
+                $out[] = ['id' => $account['form_id'], 'name' => $account['tag']];
+               // if ($i == 0) {
+               //     $selected = $account['id'];
+//}
+            }
+        }
+            // Shows how you can preselect a value
+            //echo Json::encode(['output' => $out, 'selected'=>$selected]);
+    	return $out;//$data;
+    	 }
 
 }

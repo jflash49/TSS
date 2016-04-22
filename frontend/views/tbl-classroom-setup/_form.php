@@ -130,7 +130,7 @@ AppAsset::register($this);
                            <div class="col-sm-6">
                                 <?= $form->field($modelItem, "[{$i}]tag")
                                 ->widget(DepDrop::classname(),[
-                                    'options'=>['id'=>'status'],
+                                    'options'=>['id'=>'tag'],
                                     'pluginOptions'=>[
                                         'depends'=>[Html::getInputId($modelItem,"[{$i}]type")],
                                         'placeholder'=>'Select  ...',
