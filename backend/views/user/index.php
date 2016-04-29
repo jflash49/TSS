@@ -10,13 +10,17 @@ use yii\grid\GridView;
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-index">
 
+<div class="user-index">
+<div id="sidebar" class="panel panel-default" data-spy="affix" data-offset-top="60" data-offset-bottom="400">
+ <?= Html::a('Statistics',["/site/stats"],['class'=>'btn btn-primary btn-block'])?>
+ </div>
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+
     </p>
 
     <?= GridView::widget([
@@ -47,3 +51,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 </div>
+

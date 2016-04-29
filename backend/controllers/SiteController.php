@@ -10,6 +10,8 @@ use common\models\TblClassroomSetup;
 use common\models\SearchTblClassroomSetup;
 use common\models\TblAssetLoan;
 use common\models\SearchTblAssetLoan;
+use common\models\User;
+use common\models\UserRole;
 
 /**
  * Site controller
@@ -44,6 +46,12 @@ class SiteController extends Controller
                         'allow'=>true,
                         'roles'=>['@'],
                         ],
+                        [
+                        'actions'=>['stats'],
+                        'allow'=>true,
+                        'roles'=>['@'],
+                        ],
+
                 ],
             ],
             'verbs' => [
@@ -121,5 +129,37 @@ class SiteController extends Controller
     {
         return $this->render('asset');
     }
+     /**
+     * User statistics page
+     *   
+     * @return mixed
+     */
+    public function actionStats()
+    {
+        
+         $model = array();
 
+/*$notifyModels = Notification::model()->findAllByAttributes(array(
+            'user_id'=> Yii::app()->user->uid
+        ));
+
+$count = count($notifyModels);
+Or
+
+$count = Notification::model()->countByAttributes(array(
+            'user_id'=> Yii::app()->user->uid
+        ));*/
+        $oneyrago = date('Y-m-d',strtotime(date("Y-m-d", mktime()) . " - 45 day"));
+        $twoweeksago = date('Y-m-d',strtotime(date("Y-m-d", mktime()) . " - 15 day"));
+        $now = date('Y-m-d');
+        $model[0] = count(User::find()->asArray()->all());
+        $model[1] = count(User::find()->where(['>=','lastvisit', $twoweeksago])->asArray()->all());
+        $model[2] = count(User::find()->where(['created_at' => $now])->asArray()->all());
+        $model[3] = count(User::find()->where(['>=','lastvisit', $oneyrago])->asArray()->all());
+        // $model[4] = User::find()->where(['type' => $parents[0]])->select(['tag'])->asArray()->all();
+        $model[5] = count(UserRole::find()->where(['role_id' => 7])->asArray()->all());
+        $model[6] = count(User::find()->where(['lastvisit' => $now])->asArray()->all());
+
+        return $this-> render('stats', ['model'=>$model]);
+    }
 }
