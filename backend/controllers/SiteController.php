@@ -144,7 +144,8 @@ class SiteController extends Controller
         $model = array();
         //$oneyrago = date('Y-m-d',strtotime(date("Y-m-d", mktime()) . " - 45 day"));
         //$twoweeksago = date('Y-m-d',strtotime(date("Y-m-d", mktime()) . " - 15 day"));
-        $now = date('Y-m-d');
+        $yesterday = date('Y-m-d h:m:s',strtotime(date("Y-m-d", mktime()) . " - 1 day"));
+        $now = date('Y-m-d h:m:s');
 
         $model[0] = count(User::find()->asArray()->all());
         $model[1] = count(User::find()->where(['status'=> $STATUS_ACTIVE])->asArray()->all());
@@ -154,7 +155,7 @@ class SiteController extends Controller
         //$model[3] = count(User::find()->where(['>=','lastvisit', $oneyrago])->asArray()->all());
         $model[4] = count(User::find()->where(['status' => $STATUS_BANNED])->asArray()->all());
         $model[5] = count(UserRole::find()->where(['role_id' => 7])->asArray()->all());
-        $model[6] = count(User::find()->where(['lastvisit' => $now])->asArray()->all());
+        $model[6] = count(User::find()->where([">",'lastvisit' , $yesterday])->asArray()->all());
 
         return $this-> render('stats', ['model'=>$model]);
     }
