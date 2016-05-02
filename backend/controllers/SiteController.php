@@ -120,7 +120,6 @@ class SiteController extends Controller
         return $this->render('confg');
     }
 
-
      /**
      * Configurations Page
      * @return mixed
@@ -129,6 +128,7 @@ class SiteController extends Controller
     {
         return $this->render('asset');
     }
+    
      /**
      * User statistics page
      *   
@@ -136,27 +136,23 @@ class SiteController extends Controller
      */
     public function actionStats()
     {
+         $STATUS_DELETED = 0;
+         $STATUS_ACTIVE = 10;
+         $STATUS_INACTIVE = 1;
+         $STATUS_BANNED = 2;
         
-         $model = array();
-
-/*$notifyModels = Notification::model()->findAllByAttributes(array(
-            'user_id'=> Yii::app()->user->uid
-        ));
-
-$count = count($notifyModels);
-Or
-
-$count = Notification::model()->countByAttributes(array(
-            'user_id'=> Yii::app()->user->uid
-        ));*/
-        $oneyrago = date('Y-m-d',strtotime(date("Y-m-d", mktime()) . " - 45 day"));
-        $twoweeksago = date('Y-m-d',strtotime(date("Y-m-d", mktime()) . " - 15 day"));
+        $model = array();
+        //$oneyrago = date('Y-m-d',strtotime(date("Y-m-d", mktime()) . " - 45 day"));
+        //$twoweeksago = date('Y-m-d',strtotime(date("Y-m-d", mktime()) . " - 15 day"));
         $now = date('Y-m-d');
+
         $model[0] = count(User::find()->asArray()->all());
-        $model[1] = count(User::find()->where(['>=','lastvisit', $twoweeksago])->asArray()->all());
+        $model[1] = count(User::find()->where(['status'=> $STATUS_ACTIVE])->asArray()->all());
+        //$model[1] = count(User::find()->where(['>=','lastvisit', $twoweeksago])->asArray()->all());
         $model[2] = count(User::find()->where(['created_at' => $now])->asArray()->all());
-        $model[3] = count(User::find()->where(['>=','lastvisit', $oneyrago])->asArray()->all());
-        // $model[4] = User::find()->where(['type' => $parents[0]])->select(['tag'])->asArray()->all();
+        $model[3] = count(User::find()->where(['status'=> $STATUS_INACTIVE])->asArray()->all());
+        //$model[3] = count(User::find()->where(['>=','lastvisit', $oneyrago])->asArray()->all());
+        $model[4] = count(User::find()->where(['status' => $STATUS_BANNED])->asArray()->all());
         $model[5] = count(UserRole::find()->where(['role_id' => 7])->asArray()->all());
         $model[6] = count(User::find()->where(['lastvisit' => $now])->asArray()->all());
 

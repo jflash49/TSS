@@ -16,7 +16,7 @@ use common\models\TblClassroomSetup;
 use common\models\SearchTblClassroomSetup;
 use common\models\TblAssetLoan;
 use common\models\SearchTblAssetLoan;
-use common\models\TblUser;
+use common\models\User;
 
 
 
@@ -100,12 +100,25 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!\Yii::$app->user->isGuest) {
+        
+        if (!\Yii::$app->user->isGuest) 
+        {
+            //var_dump(Yii::$app->user->id);
+            // $user->id =  Yii::$app->user->id;
+            // $user->lastvisit = date ('Y-m-d h:m:s');
+            // $user->save();
             return $this->goHome();
         }
 
         $model = new LoginForm();
+        
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+             $usr  = User::findOne(Yii::$app->user->id);//where(['id'=>Yii::$app->user->id])->one();
+             $usr->touch('lastvisit');
+            // $usr->lastvisit = date ('Y-m-d h:m:s');
+            // $usr->update();
+           
             return $this->goBack();
         } else {
             return $this->render('login', [

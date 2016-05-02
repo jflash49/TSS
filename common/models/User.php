@@ -7,6 +7,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use yii\db\Expression;
 /**
  * This is the model class for table "user".
  *
@@ -37,7 +38,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'created_at', 'updated_at'], 'required'],
+            [['username', 'auth_key', 'password_hash'], 'required'],
             [['created_at', 'updated_at', 'lastvisit', 'lastaction', 'lastpasswordchange', 'superuser', 'status'], 'integer'],
             [['notifyType'], 'string'],
             [['username', 'firstname', 'lastname', 'password_hash', 'password_reset_token', 'email'], 'string', 'max' => 255],
@@ -92,7 +93,15 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            'timestamp' => [
+                'class'=> TimestampBehavior::className(),
+                'attributes'=> [
+                    ActiveRecord::EVENT_BEFORE_INSERT=> ['created_at','updated_at','lastvisit'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE=> ['updated_at'],
+                    ActiveRecord::EVENT_BEFORE_VALIDATE=>['lastvisit'],
+                ],  
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
 

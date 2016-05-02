@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <tr><td>Inactive users</td> <td><?php echo ($model[3]) ?><td></tr>
 
-<tr><td>Banned users</td> <td><?php echo ($model[1]) ?><td></tr>
+<tr><td>Banned users</td> <td><?php echo ($model[4]) ?><td></tr>
 
 <tr><td>Admin Users</td> <td><?php echo ($model[5]) ?><td></tr>
 
