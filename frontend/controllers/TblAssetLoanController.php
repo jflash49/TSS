@@ -236,8 +236,26 @@ class TblAssetLoanController extends Controller
      * @param none
      * @return mixed
      */
-    public function actionTag(){
-        $out=[];
+    public function actionTag($id)
+    {     
+        $countItems = TblIsInventory::find()
+                    ->where(['type' => $id])
+                    ->count();//->select(['tag'])->asArray()->all());
+        $items = TblIsInventory::find()
+                ->where(['type' => $id])
+                ->select(['form_id','tag'])
+                //->asArray()
+                ->all();
+        if ($countItems > 0){
+            foreach ($items as $item) {
+                # code...
+                echo "<option value='". $item->form_id."'>".$item->tag."</option>";
+            }
+        }
+        else{
+            echo "<option>-</option>";
+        }
+       /* $out=[];
         if (isset($_POST['depdrop_parents'])){
             $parents = $_POST['depdrop_parents'];
             if ($parents != null){
@@ -249,6 +267,6 @@ class TblAssetLoanController extends Controller
             }
             $out = array("Volvo", "BMW", "Toyota");
         }
-        echo Json::encode(['output'=>$out,'selected'=>'']);
+        echo Json::encode(['output'=>$out,'selected'=>'']);*/
     }
 }

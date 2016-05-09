@@ -96,25 +96,32 @@ AppAsset::register($this);
                          <div class="col-sm-6">
                         <?= $form->field($modelItem, "[{$i}]type")->dropDownList(
                             ArrayHelper::map(TblInventoryType::find()->all(), 'id','name'),
-                            ['prompt'=>'Select Inventory Item']
-                            )?>
+                            ['prompt'=>'Select Inventory Item',
+                            'onchange'=> '$.post("index.php?r=tbl-asset-loan/tag&id='.'"+$(this).val(), function (data){
+                                $( "select#'.Html::getInputId($modelItem,"[{$i}]tag").'").html(data);
+                            });'
+                            ])?>
                         </div>
                            <div class="col-sm-6">
-                                  <?= $form->field($modelItem, "[{$i}]tag")
-                                ->widget(DepDrop::classname(),[
+                                  <?= $form->field($modelItem, "[{$i}]tag")->dropDownList(
+                            ArrayHelper::map(TblIsInventory::find()->all(),'form_id','tag'),
+                            [
+                                    'prompt'=> 'Select Item',
+                                ])
+                                 ?>
+                        </div>
+                            </div>
+                        </div><!--  /*->widget(DepDrop::classname(),[
                                     'options'=>['id'=>'tag'],
                                     'pluginOptions'=>[
                                         'depends'=>[Html::getInputId($modelItem,"[{$i}]type")],
                                         'placeholder'=>'Select  ...',
                                         'url'=>Url::to(['/tbl-asset-loan/tag'])
                                         ]
-                                    ]);
+                                    ]);*/
                             //(TblIsInventory::find()->all(), 'tag','tag'),
                            // ['prompt'=>'Select Inventory Item']
-                            //)?>
-                        </div>
-                            </div>
-                        </div><!-- .row -->
+                            //).row -->
                     </div>
                 </div>
                 <?php endforeach; ?>
