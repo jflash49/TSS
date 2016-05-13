@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Asset Loan (Status)', ['create'], ['class' => 'btn btn-success']) ?>
+        <!--?= //Html::a('Create Asset Loan (Status)', ['create'], ['class' => 'btn btn-success']) ?-->
     </p>
 
     <?= GridView::widget([
@@ -27,11 +27,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'entry_id',
-            'inventory_id',
-            'received_by',
-            'status',
+            //'id',
+            //'entry_id',
+            //'inventory_id',
+            ['attribute'=>'inventory_id',
+            'value'=>'inventorY.tag',
+            'label'=>'Inventory '],
+            //'received_by',
+            ['attribute'=>'received_by',
+            'value'=>'useR.username',
+            'label'=>'Received By'],
+            ['attribute'=>'status',
+            'value'=>'statuS.status_name',
+           'label'=> 'Status'],
+            // 'status',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

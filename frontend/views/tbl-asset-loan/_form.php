@@ -107,6 +107,7 @@ AppAsset::register($this);
                             ArrayHelper::map(TblIsInventory::find()->all(),'form_id','tag'),
                             [
                                     'prompt'=> 'Select Item',
+                                    'onchange'=> 'console.log("'.Html::getInputId($modelItem,"[{$i}]tag").'");'
                                 ])
                                  ?>
                         </div>

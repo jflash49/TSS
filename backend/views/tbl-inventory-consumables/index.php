@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\SearchTblInventoryConsumables */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tbl Inventory Consumables';
+$this->title = 'Consumables';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-inventory-consumables-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Tbl Inventory Consumables', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Consumables', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,12 +25,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'device_type',
             'consumable:ntext',
-            'optimal_storage_level',
-            'storage_point',
-            // 'current_stock',
+            ['attribute'=>'optimal_storage_level',
+            'value'=>'optimal_storage_level',
+            'label'=>'Optimal Quantity'],
+            ['attribute'=>'storage_point',
+            'value'=>'storage_point',
+            'label'=>'Reorder point'],
+            'current_stock',
+            ['value'=>'reorderQuantity',
+            'label'=>'Reorder Quantity'],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

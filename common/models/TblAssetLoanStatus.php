@@ -47,4 +47,36 @@ class TblAssetLoanStatus extends \yii\db\ActiveRecord
             'status' => 'Status',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssetLoan()
+    {
+        return $this ->hasOne(TblAssetLoan::className(),['entry_id'=>'entry_id']);
+    }
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInventorY()
+    {
+       return $this->hasOne(TblIsInventory::classname(),['form_id'=>'inventory_id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUseR()
+    {
+        return $this ->hasOne(User::className(),['id'=>'received_by']);
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatuS()
+    {
+       return $this->hasOne(TblStatuses::classname(),['id'=>'status']);
+    }
 }
